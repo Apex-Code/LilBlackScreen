@@ -12,29 +12,26 @@ import static javafx.application.Platform.exit;
 
 public class Contacts {
     //*****Create final variables to be used as parsing indexes*******
-    private static final int ID		    = 0;
-    private static final int FIRSTNAME	= 1;
-    private static final int LASTNAME	= 2;
-    private static final int NICKNAME	= 3;
-    private static final int EMAIL		= 4;
-    private static final int STREET	= 5;
-    private static final int CITY		= 6;
-    private static final int STATE		= 7;
-    private static final int ZIPCODE	= 8;
-    private static final int PHONE		= 9;
+    private static final int ID = 0;
+    private static final int FIRSTNAME = 1;
+    private static final int LASTNAME = 2;
+    private static final int NICKNAME = 3;
+    private static final int EMAIL = 4;
+    private static final int STREET = 5;
+    private static final int CITY = 6;
+    private static final int STATE = 7;
+    private static final int ZIPCODE = 8;
+    private static final int PHONE = 9;
 
 
     private static ArrayList<Person> contactz = new ArrayList<>();
-    private static final String[] statelist = new String[]{"AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"};
-    private static final String zipRegex = "^[0-9]{5}(?:-[0-9]{4})?$";
+
     private static Scanner sc = new Scanner(System.in);
     public static String firstName;
     public static String lastName;
     public static String nickName;
     public static String phone;
     public static String email;
-    private static String regexStr = "^(?:(?:\\+?1\\s*(?:[.-]\\s*)?)?(?:\\(\\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\\s*\\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\\s*(?:[.-]\\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\\s*(?:[.-]\\s*)?([0-9]{4})(?:\\s*(?:#|x\\.?|ext\\.?|extension)\\s*(\\d+))?$";
-    private static String emailRegex = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
     public static String address;
     public static String street;
     private static String state;
@@ -43,6 +40,7 @@ public class Contacts {
     private static int id;
 
     public static void main(String[] args) {
+        String menuChoice = "";
         loadContacts();
         displayMenu();
     }
@@ -195,10 +193,10 @@ public class Contacts {
         }
     }
 
-    private static void createContactZip() {
+    private void createContactZip() {
         Screen.drawContactZip();
         zip = sc.nextLine();
-        if (zip.matches(zipRegex)) {
+        if (setZipCode(zip)) {
             createPerson();
         } else {
             Screen.notInt();
@@ -267,29 +265,27 @@ public class Contacts {
     private static void displayMenu() {
 
         Screen.drawMainMenu();
-        try {
-            int choice = sc.nextInt();
+        String choice = sc.next();
+
+        while (!"4".equals(choice)) {
 
             switch (choice) {
-                case 1:
+                case "1":
                     listContacts();
                     break;
-                case 2:
+                case "2":
                     createContactFName();
                     break;
-                case 3:
+                case "3":
                     searchContacts(contactz);
                     break;
-                case 4:
+                case "4":
                     exit();
                     break;
                 default:
                     invalidInputError();
                     break;
             }
-
-        } catch (InputMismatchException exception) {
-            invalidInputError();
         }
     }
 
@@ -474,7 +470,7 @@ public class Contacts {
                 "4,Joejohn,Jaberwocky,Jack,jaberwocky@goto.com,7854 Redneck Hwy,Wayout,GA,31085,960-555-9173",
                 "5,Biff,Persay,Ugh,bper@bper.net,9908 Penthouse Lane,Smalltown,IA,52841,319-555-1044"};
 
-        for(int personX = 0; personX < addressBook.length; personX++){
+        for (int personX = 0; personX < addressBook.length; personX++) {
 
 //    ************PARSE ARRAY************
             String contactInfo[] = addressBook[personX].split(",");
@@ -482,22 +478,20 @@ public class Contacts {
             boolean addThis;
             Person newContact = new Person();
 
-           addThis = newContact.setId(Integer.parseInt(contactInfo[ID]));
-           addThis = newContact.setFirstName(contactInfo[FIRSTNAME]);
-           addThis = newContact.setLastName(contactInfo[LASTNAME]);
-           addThis = newContact.setNickname(contactInfo[NICKNAME]);
-           addThis = newContact.setEmail(contactInfo[EMAIL]);
-           addThis = newContact.setStreet(contactInfo[STREET]);
-           addThis = newContact.setCity(contactInfo[CITY]);
-           addThis = newContact.setState(contactInfo[STATE]);
-           addThis = newContact.setZipCode(contactInfo[ZIPCODE]);
-           addThis = newContact.setPhone(contactInfo[PHONE]);
+            addThis = newContact.setId(Integer.parseInt(contactInfo[ID]));
+            addThis = newContact.setFirstName(contactInfo[FIRSTNAME]);
+            addThis = newContact.setLastName(contactInfo[LASTNAME]);
+            addThis = newContact.setNickname(contactInfo[NICKNAME]);
+            addThis = newContact.setEmail(contactInfo[EMAIL]);
+            addThis = newContact.setStreet(contactInfo[STREET]);
+            addThis = newContact.setCity(contactInfo[CITY]);
+            addThis = newContact.setState(contactInfo[STATE]);
+            addThis = newContact.setZipCode(contactInfo[ZIPCODE]);
+            addThis = newContact.setPhone(contactInfo[PHONE]);
 
             contactz.add(newContact);
         }
     }
-
-
 
 
 }
