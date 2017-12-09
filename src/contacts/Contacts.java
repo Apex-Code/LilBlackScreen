@@ -38,11 +38,38 @@ public class Contacts {
     public static String city;
     private static String zip;
     private static int id;
+//{1} Add a Contact",
+//{2} View Contacts",
+//{3} Search Contacts",
+//{4} Close Lil' Black Book"
 
     public static void main(String[] args) {
         String menuChoice = "";
         loadContacts();
         displayMenu();
+        while(!"4".equals(menuChoice)){  //As long as user doesn't enter 4, show the menu.
+            Screen.drawMenu();            menuChoice = Screen.getMenuSelection();
+
+            switch (menuChoice){
+                case "1": //Add a new Contact
+                    if(contactz.size() == 10){
+                        Screen.drawRecord(Screen.ADD, false);
+                        Screen.printError("You must delete contact to add another.");
+                        Screen.pauseScreen();
+                    } else{
+                        addContact();
+                    }
+                    break;
+
+                case "2": listContacts();
+                break;
+
+                case "3" : searchContacts(contactz);
+                break;
+
+                case "4" : 
+            }
+        }
     }
 
     private static void listContacts() {
