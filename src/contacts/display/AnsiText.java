@@ -110,10 +110,10 @@ public class AnsiText {
         if (row <= 0 && column <= 0) {
             throw new IllegalArgumentException("ansiText.printMessage() Row and Column must both be >= 1.");
         }
-        if (row <= 0 && column > 0) {
+        if (row <= 0) {
             throw new IllegalArgumentException("ansiText.printMessage() Row must be >= 1.");
         }
-        if (row > 0 && column <= 0) {
+        if (column <= 0) {
             throw new IllegalArgumentException("ansiText.printMessage() Column must be >= 1.");
         }
         return true;

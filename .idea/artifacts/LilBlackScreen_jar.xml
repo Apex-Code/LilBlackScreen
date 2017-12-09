@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="LilBlackScreen:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/LilBlackScreen_jar</output-path>
+    <root id="archive" name="LilBlackScreen.jar">
+      <element id="module-output" name="LilBlackScreen" />
+    </root>
+  </artifact>
+</component>
