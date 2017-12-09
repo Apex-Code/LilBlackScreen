@@ -479,18 +479,19 @@ public class Contacts {
 //    ************PARSE ARRAY************
             String contactInfo[] = addressBook[personX].split(",");
 
+            boolean addThis;
             Person newContact = new Person();
 
-            newContact.setId(Integer.parseInt(contactInfo[ID]));
-            newContact.setFirstName(contactInfo[FIRSTNAME]);
-            newContact.setLastName(contactInfo[LASTNAME]);
-            newContact.setNickname(contactInfo[NICKNAME]);
-            newContact.setEmail(contactInfo[EMAIL]);
-            newContact.setStreet(contactInfo[STREET]);
-            newContact.setCity(contactInfo[CITY]);
-            newContact.setState(contactInfo[STATE]);
-            newContact.setZipCode(contactInfo[ZIPCODE]);
-            newContact.setPhone(contactInfo[PHONE]);
+           addThis = newContact.setId(Integer.parseInt(contactInfo[ID]));
+           addThis = newContact.setFirstName(contactInfo[FIRSTNAME]);
+           addThis = newContact.setLastName(contactInfo[LASTNAME]);
+           addThis = newContact.setNickname(contactInfo[NICKNAME]);
+           addThis = newContact.setEmail(contactInfo[EMAIL]);
+           addThis = newContact.setStreet(contactInfo[STREET]);
+           addThis = newContact.setCity(contactInfo[CITY]);
+           addThis = newContact.setState(contactInfo[STATE]);
+           addThis = newContact.setZipCode(contactInfo[ZIPCODE]);
+           addThis = newContact.setPhone(contactInfo[PHONE]);
 
             contactz.add(newContact);
         }
