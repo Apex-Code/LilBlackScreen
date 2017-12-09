@@ -4,13 +4,17 @@ package contacts;
 public class Person {
     private String firstName, lastName, address, phone;
     private String city, state, email, nickname, street, zipCode;
+    private int id;
 
-    Person(String firstName, String lastName, String nickname,
-           String email, String address, String street, String city,
+    Person(){}
+
+    Person(int id, String firstName, String lastName, String nickname,
+           String email, String street, String city,
            String state, String zipCode, String phone) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.address = address;
+        this.street = street;
         this.city = city;
         this.street = street;
         this.state = state;
@@ -109,6 +113,14 @@ public class Person {
     public String getFullAddress() {
         return this.getAddress() + " " + this.getStreet() + " " + this.getCity() + ", " +
                 this.getState() + " " + this.getZipCode();
+    }
+
+    public int getId(){
+        return id;
+    }
+
+    public void setId(int id){
+        this.id = id;
     }
 
 //########################END GETTERS AND SETTERS################################

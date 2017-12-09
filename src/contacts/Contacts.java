@@ -11,6 +11,18 @@ import static contacts.display.AnsiText.clearScreen;
 import static javafx.application.Platform.exit;
 
 public class Contacts {
+    //*****Create final variables to be used as parsing indexes*******
+    private static final int ID		    = 0;
+    private static final int FIRSTNAME	= 1;
+    private static final int LASTNAME	= 2;
+    private static final int NICKNAME	= 3;
+    private static final int EMAIL		= 4;
+    private static final int STREET	= 5;
+    private static final int CITY		= 6;
+    private static final int STATE		= 7;
+    private static final int ZIPCODE	= 8;
+    private static final int PHONE		= 9;
+
 
     private static ArrayList<Person> contactz = new ArrayList<>();
     private static final String[] statelist = new String[]{"AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"};
@@ -28,36 +40,10 @@ public class Contacts {
     private static String state;
     public static String city;
     private static String zip;
+    private static int id;
 
     public static void main(String[] args) {
-// first,last,nick,email,street,city,state,zip,phone
-
-
-        contactz.add(new Person("Dennis", "Sanders", "Dk",
-                "dksand@comcast.net", "5335", "Gathering Oaks Ct E",
-                "Jacksonville", "FL", "32258", "904-207-8023"));
-
-        contactz.add(new Person("Christopher", "Sanders",
-                "The Dude", "christopher-sanders@hotmail.com",
-                "601", "Crestview Dr", "Legrand", "IA",
-                "50142", "641-751-8981"));
-
-        contactz.add(new Person("Bettysue", "Sugarbottom", "Sweety",
-                "bs.sugar@nowhere.com", "123",
-                "Beachside Rd", "Atlantic Beach",
-                "FL", "32486", "904-555-1111"));
-
-        contactz.add(new Person("Joejohn", "Jaberwocky", "Jack",
-                "jaberwocky@goto.com", "7854", "Redneck Hwy",
-                "Wayout", "GA", "31085", "960-555-9173"));
-
-        contactz.add(new Person("Biff", "Persay", "Ugh",
-                "bper@bper.net", "9908", "Penthouse Lane",
-                "Smalltown", "IA", "52841", "319-555-1044"));
-
-
-        Screen.drawWelcome();
-        promptEnter();
+        loadContacts();
         displayMenu();
     }
 
@@ -222,8 +208,8 @@ public class Contacts {
     }
 
     private static void createPerson() {
-        Person newContact = new Person(firstName, lastName, nickName, email, address, street, city,
-                state, zip, phone);
+        Person newContact = new Person(id, firstName, lastName, nickName,
+                email, address, city, state, zip, phone);
         contactz.add(newContact);
         Screen.drawSuccess();
         promptEnter();
@@ -479,6 +465,38 @@ public class Contacts {
         }
 
     }
+
+    private static void loadContacts() {
+        String[] addressBook = {
+                "1,Dennis,Sanders,Dk,dksand@comcast.net,5335 Gathering Oaks Ct E,Jacksonville,FL,32258,904-207-8023",
+                "2,Christopher,Sanders,The Dude,christopher-sanders@hotmail.com,601 Crestview Dr,Legrand,IA,50142,641-751-8981",
+                "3,Bettysue,Sugarbottom,Sweety,bs.sugar@nowhere.com,123 Beachside Rd,Atlantic Beach,FL,32486,904-555-1111",
+                "4,Joejohn,Jaberwocky,Jack,jaberwocky@goto.com,7854 Redneck Hwy,Wayout,GA,31085,960-555-9173",
+                "5,Biff,Persay,Ugh,bper@bper.net,9908 Penthouse Lane,Smalltown,IA,52841,319-555-1044"};
+
+        for(int personX = 0; personX < addressBook.length; personX++){
+
+//    ************PARSE ARRAY************
+            String contactInfo[] = addressBook[personX].split(",");
+
+            Person newContact = new Person();
+
+            newContact.setId(Integer.parseInt(contactInfo[ID]));
+            newContact.setFirstName(contactInfo[FIRSTNAME]);
+            newContact.setLastName(contactInfo[LASTNAME]);
+            newContact.setNickname(contactInfo[NICKNAME]);
+            newContact.setEmail(contactInfo[EMAIL]);
+            newContact.setStreet(contactInfo[STREET]);
+            newContact.setCity(contactInfo[CITY]);
+            newContact.setState(contactInfo[STATE]);
+            newContact.setZipCode(contactInfo[ZIPCODE]);
+            newContact.setPhone(contactInfo[PHONE]);
+
+            contactz.add(newContact);
+        }
+    }
+
+
 
 
 }
