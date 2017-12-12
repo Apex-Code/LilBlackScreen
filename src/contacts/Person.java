@@ -15,22 +15,6 @@ public class Person {
 
     Person(){}
 
-    Person(int id, String firstName, String lastName, String nickname,
-           String email, String street, String city,
-           String state, String zipCode, String phone) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.street = street;
-        this.city = city;
-        this.street = street;
-        this.state = state;
-        this.email = email;
-        this.nickname = nickname;
-        this.zipCode = zipCode;
-        this.phone = phone;
-    }
-
 
     //#######################START GETTERS###################################
     public String getPhone() {
@@ -110,7 +94,7 @@ public class Person {
             return false;
         }
         this.lastName = lastName;
-        return false;
+        return true;
     }
 
     boolean setNickname(String nickname) {
